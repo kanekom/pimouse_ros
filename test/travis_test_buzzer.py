@@ -36,7 +36,7 @@ class BuzzerTest(unittest.TestCase):
 
         self.assertTrue(self.client.get_result(), "invalid result")
         self.assertEqual(goal.freqs.self.device_values, "invalid feedback:"
-            + ",".join([str(e) for e in self.device_values])
+            + ",".join([str(e) for e in self.device_values]))
 
         self.device_values = []
         self.client.send_goal(goal.feedback_cb=self.feedback_cb)
@@ -45,7 +45,7 @@ class BuzzerTest(unittest.TestCase):
         self.assertFalse(self.client.get_result(), "stop is requested but return true")
         self.assertFalse(goal.freqs == self.device_values, "not stopped")
 
-    def feedback_cb(self.feedback):
+    def feedback_cb(self,feedback):
         with open("/dev/rtbuzzer0", "r") as f:
             data = f.readline();
             self.device_values.append(int(data.rstrip()))
